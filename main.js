@@ -162,6 +162,14 @@ const LANGUAGE_BY_LOCALE = {
     "zu": "Zulu",
 }
 
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -173,6 +181,7 @@ let app = new Vue({
         testIndex: 0,
         testWords: [],
         showWord: false,
+        shuffle: true,
         currentDirection: "slide-right-fade",
         currentDirection2: "slide-up-fade",
     },
@@ -195,9 +204,12 @@ let app = new Vue({
             return LANGUAGE_BY_LOCALE[code.toLowerCase()] || LANGUAGE_BY_LOCALE[code.toLowerCase().split("-")[0]];
         },
         startTest() {
-            this.testing = true;
-            this.testIndex = 0;
             this.testWords = this.words.split("\n");
+            if (this.shuffle) {
+                shuffle(this.testWords);
+            }
+            this.testIndex = 0;
+            this.testing = true;
             this.speakWord();
         },
         speakWord() {

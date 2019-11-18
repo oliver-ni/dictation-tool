@@ -45,6 +45,14 @@
 
                     <div class="field">
                         <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="shuffle"> Shuffle order of words
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
                             <button class="button is-link" id="startButton">Start</button>
                         </div>
                     </div>
@@ -64,7 +72,6 @@
         </section>
 
         <div id="testScreen" :class="{ 'open': testing }">
-            <div id="closeButton"><a href="#" @click="testing = !testing">Close</a></div>
             <div id="bottomButtons">
                 <div><a v-if="testIndex > 0" href="#" @click="previousWord">Previous</a></div>
                 <div><a href="#" @click="speakWord">Repeat</a></div>
@@ -81,6 +88,7 @@
                 </div>
             </transition>
             <div class="subtitle" id="indexLabel">{{ testIndex + 1}} out of {{ testWords.length }}</div>
+            <div id="closeButton"><a href="#" @click="testing = !testing">Close</a></div>
         </div>
 
     </div>
