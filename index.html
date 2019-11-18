@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dictation Tool</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Dictation Tool</h1>
+                <h3 class="subtitle">
+                    Help prepare for a dictation test. Enter your words, one per line, then press start.
+                </h3>
+
+                <form @submit.prevent="startTest">
+                    <div class="field">
+                        <label class="label">Words</label>
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Enter your words, one per line..."
+                                v-model="words"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Language</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="languageSelect" v-model="svoice">
+                                    <option v-for="(voice, idx) in voices" :value="idx">
+                                        {{ voice.humanName || voice.lang }} ({{ voice.name }})</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-link" id="startButton">Start</button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr>
+
+                <div class="content">
+                    <ul>
+                        <li>Left and right arrows to navigate</li>
+                        <li>Space to repeat word</li>
+                        <li>Up arrow to hide/reveal word</li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+        <div id="testScreen" :class="{ 'open': testing }">
+            <div id="closeButton"><a href="#" @click="testing = !testing">Close</a></div>
+            <div id="bottomButtons">
+                <div><a v-if="testIndex > 0" href="#" @click="previousWord">Previous</a></div>
+                <div><a href="#" @click="speakWord">Repeat</a></div>
+                <div><a v-if="testIndex < testWords.length - 1" href="#" @click="nextWord">Next</a></div>
+            </div>
+            <transition :name="currentDirection" mode="out-in">
+                <div :key="testIndex">
+                    <transition :name="currentDirection2" mode="out-in">
+                        <div key="show" class="title is-1" id="testWord" v-if="!showWord" @click="showWord = !showWord"
+                            style="cursor: pointer;">Show</div>
+                        <div key="hide" class="title is-1" id="testWord" v-else @click="showWord = !showWord"
+                            style="cursor: pointer;">{{ testWords[testIndex] }}</div>
+                    </transition>
+                </div>
+            </transition>
+            <div class="subtitle" id="indexLabel">{{ testIndex + 1}} out of {{ testWords.length }}</div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+
+
+</body>
+
+</html>

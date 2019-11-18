@@ -1,0 +1,112 @@
+#testScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    z-index: 100;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(100vh);
+    opacity: 0;
+}
+
+#testScreen.open {
+    transform: none;
+    opacity: 1;
+}
+
+#closeButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#bottomButtons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+}
+
+#indexLabel {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#bottomButtons > div {
+    text-align: center;
+    flex-basis: 0;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+    #bottomButtons {
+        flex-direction: column;
+    }
+}
+
+.slide-right-fade-enter-active {
+    transition: all 0.15s ease;
+}
+.slide-right-fade-leave-active {
+    transition: all 0.15s ease;
+}
+.slide-right-fade-enter {
+    transform: translateX(10px);
+    opacity: 0;
+}
+.slide-right-fade-leave-to {
+    transform: translateX(-10px);
+    opacity: 0;
+}
+.slide-left-fade-enter-active {
+    transition: all 0.15s ease;
+}
+.slide-left-fade-leave-active {
+    transition: all 0.15s ease;
+}
+.slide-left-fade-enter {
+    transform: translateX(-10px);
+    opacity: 0;
+}
+.slide-left-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
+.slide-up-fade-enter-active {
+    transition: all 0.15s ease;
+}
+.slide-up-fade-leave-active {
+    transition: all 0.15s ease;
+}
+.slide-up-fade-enter {
+    transform: translateY(10px);
+    opacity: 0;
+}
+.slide-up-fade-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+.slide-down-fade-enter-active {
+    transition: all 0.15s ease;
+}
+.slide-down-fade-leave-active {
+    transition: all 0.15s ease;
+}
+.slide-down-fade-enter {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+.slide-down-fade-leave-to {
+    transform: translateY(10px);
+    opacity: 0;
+}
