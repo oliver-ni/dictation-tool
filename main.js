@@ -237,13 +237,15 @@ let app = new Vue({
         handleKeyPress(e) {
             if (!this.testing) return;
 
+            console.log(e);
+
             if (e.key == "ArrowRight") {
                 e.preventDefault();
                 this.nextWord();
             } else if (e.key == "ArrowLeft") {
                 e.preventDefault();
                 this.previousWord();
-            } else if (e.key == "Space") {
+            } else if (e.key == " ") {
                 e.preventDefault();
                 this.speakWord();
             } else if (e.key == "ArrowUp") {
