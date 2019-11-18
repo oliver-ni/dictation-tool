@@ -71,25 +71,27 @@
 
         </section>
 
-        <div id="testScreen" :class="{ 'open': testing }">
-            <div id="bottomButtons">
-                <div><a v-if="testIndex > 0" href="#" @click="previousWord">Previous</a></div>
-                <div><a href="#" @click="speakWord">Repeat</a></div>
-                <div><a v-if="testIndex < testWords.length - 1" href="#" @click="nextWord">Next</a></div>
-            </div>
-            <transition :name="currentDirection" mode="out-in">
-                <div :key="testIndex">
-                    <transition :name="currentDirection2" mode="out-in">
-                        <div key="show" class="title is-1" id="testWord" v-if="!showWord" @click="showWord = !showWord"
-                            style="cursor: pointer;">Show</div>
-                        <div key="hide" class="title is-1" id="testWord" v-else @click="showWord = !showWord"
-                            style="cursor: pointer;">{{ testWords[testIndex] }}</div>
-                    </transition>
+        <transition name="slide-big-fade">
+            <div id="testScreen" v-if="testing">
+                <div id="bottomButtons">
+                    <div><a v-if="testIndex > 0" href="#" @click="previousWord">Previous</a></div>
+                    <div><a href="#" @click="speakWord">Repeat</a></div>
+                    <div><a v-if="testIndex < testWords.length - 1" href="#" @click="nextWord">Next</a></div>
                 </div>
-            </transition>
-            <div class="subtitle" id="indexLabel">{{ testIndex + 1}} out of {{ testWords.length }}</div>
-            <div id="closeButton"><a href="#" @click="testing = !testing">Close</a></div>
-        </div>
+                <transition :name="currentDirection" mode="out-in">
+                    <div :key="testIndex">
+                        <transition :name="currentDirection2" mode="out-in">
+                            <div key="show" class="title is-1" id="testWord" v-if="!showWord"
+                                @click="showWord = !showWord" style="cursor: pointer;">Show</div>
+                            <div key="hide" class="title is-1" id="testWord" v-else @click="showWord = !showWord"
+                                style="cursor: pointer;">{{ testWords[testIndex] }}</div>
+                        </transition>
+                    </div>
+                </transition>
+                <div class="subtitle" id="indexLabel">{{ testIndex + 1}} out of {{ testWords.length }}</div>
+                <div id="closeButton"><a href="#" @click="testing = !testing">Close</a></div>
+            </div>
+        </transition>
 
     </div>
 
